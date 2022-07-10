@@ -18,20 +18,30 @@ def categories():
 def add_category():
     # adding new category
     if request.method == "POST":
-        #grabs name from form input and creates new entry in Category table
+        # grabs name from form input and creates new entry in Category table
         category = Category(category_name=request.form.get("category_name"))
         db.session.add(category)
         db.session.commit()
-        #redirects user to categories page after submitting
+        # redirects user to categories page after submitting
         return redirect(url_for("categories"))
     return render_template("add_category.html")
 
 
 @app.route("/edit_category/<int:category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
+    # returns query or 404 if element is not found
     category = Category.query.get_or_404(category_id)
     if request.method == "POST":
+        # alters category name and commits to the DB
         category.category_name = request.form.get("category_name")
         db.session.commit()
         return redirect(url_for("categories"))
     return render_template("edit_category.html", category=category)
+
+
+@app.route("/delete_category/<int:category_id>")
+def delete_category(category_id):
+    category = Category.query.get_or_404(category_id)
+    db.session.delete(category)
+    db.session.commit()
+    return redirect(url_for("categories"))
