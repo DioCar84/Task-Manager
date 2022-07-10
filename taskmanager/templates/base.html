@@ -26,17 +26,16 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="">New Task</a></li>
-                    <li><a href="">Categories</a></li>
+                    <li><a href="{{ url_for('categories') }}">Categories</a></li>
                 </ul>
             </div>
         </nav>
 
         <!-- mobile sidenav -->
         <ul class="sidenav" id="mobile-demo">
-            <!-- url_for only takes home parameter since it is calling a function and not a folder-->
             <li><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="">New Task</a></li>
-            <li><a href="">Categories</a></li>
+            <li><a href="{{ url_for('categories') }}">Categories</a></li>
         </ul>
     </header>
 
